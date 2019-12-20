@@ -25,11 +25,6 @@ project "Elifoot"
         "%{prj.name}/src/**.c"
     }
 
-    includedirs
-    {
-        "%{prj.name}/src",
-    }
-
     filter "configurations:Debug"
         runtime "Debug"
         symbols "on"
