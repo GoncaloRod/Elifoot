@@ -8,7 +8,7 @@ typedef struct
 
 typedef struct
 {
-	char name[32];
+	char name[64];
 } Coach;
 
 typedef struct 
@@ -21,13 +21,13 @@ typedef struct
 
 typedef struct
 {
-	char name[32];
+	char name[64];
 	int number;
 	float salary;
 	Date contractSignedDate;
 	int contractYears;
 	PlayerStats stats;
-	int enable;
+	char enable;
 } Player;
 
 typedef struct
@@ -39,7 +39,7 @@ typedef struct
 typedef struct
 {
 	Game gamesPlayed[17 * 2];
-	int gamesPlayed;
+	int gamesPlayedCount;
 	int wins, draws, defeats;
 	int goalsScored, goalsSuffered;
 } ResultsTable;
@@ -47,13 +47,15 @@ typedef struct
 typedef struct
 {
 	Coach coach;
-	Player player[25];
+	Player* players;
+	int playersCount;
+	int maxPlayers;
 } Squad;
 
 typedef struct
 {
-	char name[32];
-	char stadiumName[32];
+	char name[64];
+	char stadiumName[64];
 	int stadiumCapacity;
 	int associates;
 	float funds;

@@ -17,12 +17,12 @@ project "Elifoot"
 
     targetdir("bin/" .. outputdir .. "/%{prj.name}")
     objdir("bin-int/" .. outputdir .. "/%{prj.name}")
-    debugdir("bin/" .. outputdir .. "/%{prj.name}")
 
     files
     {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.c"
+        "%{prj.name}/src/**.c",
+        "%{prj.name}/**.elf"
     }
 
     filter "configurations:Debug"
