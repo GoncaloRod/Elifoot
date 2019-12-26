@@ -11,6 +11,16 @@ int main(int argc, char** argv)
 
 	teams = ReadTeams("teams.elf", &teamsCount);
 
+	// Choose team
+
+	// Draw games
+
+	// Game loop
+	for (int i = 0; i < (teamsCount - 1) * 2; i++)
+	{
+
+	}
+
 	// Free dynamically allocated memory
 	for (int i = 0; i < teamsCount; i++)
 	{
