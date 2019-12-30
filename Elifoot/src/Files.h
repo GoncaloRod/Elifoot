@@ -15,6 +15,6 @@
 
 Team* ReadTeams(char* fileName, int* teamCount);
 
-int ReadTeam(char* fileName, Team* team);
+int ReadTeam(char* fileName, Team* team, int teamsCount);
 
 #endif // !FILES_H_

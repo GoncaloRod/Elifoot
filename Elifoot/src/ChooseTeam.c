@@ -21,5 +21,7 @@ Team* ChooseTeam(Team* teams, int teamCount)
 
 	} while (teamIndex < 0 || teamIndex > teamCount);
 
+	system("cls");
+
 	return teams + (teamIndex - 1);
 }

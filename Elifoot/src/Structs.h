@@ -38,7 +38,7 @@ typedef struct
 
 typedef struct
 {
-	Game gamesPlayed[17 * 2];
+	Game* games;
 	int gamesPlayedCount;
 	int wins, draws, defeats;
 	int goalsScored, goalsSuffered;

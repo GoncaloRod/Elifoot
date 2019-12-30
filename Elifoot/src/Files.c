@@ -34,7 +34,7 @@ Team* ReadTeams(char* fileName, int* teamCount)
 
 		fscanf_s(fp, "%s", teamFileName, 32);
 
-		if (!ReadTeam(teamFileName, teams + i))
+		if (!ReadTeam(teamFileName, teams + i, *teamCount))
 		{
 			fclose(fp);
 			return NULL;
@@ -46,7 +46,7 @@ Team* ReadTeams(char* fileName, int* teamCount)
 	return teams;
 }
 
-int ReadTeam(char* fileName, Team* team)
+int ReadTeam(char* fileName, Team* team, int teamsCount)
 {
 	FILE* fp;
 	Player* player;
@@ -61,6 +61,12 @@ int ReadTeam(char* fileName, Team* team)
 	fscanf_s(fp, " %d %d %f %f", &team->stadiumCapacity, &team->associates, &team->funds, &team->stadiumExpenses);
 
 	// Initialize results table
+	if (!(team->results.games = (Game*)malloc((teamsCount - 1) * 2 * sizeof(Game))))
+	{
+		fclose(fp);
+		return 0;
+	}
+	
 	team->results.gamesPlayedCount = 0;
 	team->results.wins = team->results.draws = team->results.defeats = 0;
 	team->results.goalsScored = team->results.goalsSuffered = 0;
