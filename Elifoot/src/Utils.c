@@ -18,3 +18,8 @@ void ShiftIntArrRight(int* arr, int count)
 
 	arr[0] = temp;
 }
+
+void ClrScr()
+{
+	system("cls");
+}

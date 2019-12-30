@@ -1,4 +1,4 @@
-#include "ShuffleCalendar.h"
+#include "Calendar.h"
 
 #include "Utils.h"
 
@@ -54,4 +54,20 @@ void ShuffleCalendar(Team* teams, int teamsCount)
 	}
 
 	free(shuffle);
+}
+
+void PrintGameCalendar(Team* teams, Team* playerTeam, int teamsCount)
+{
+	Game game;
+
+	ClrScr();
+
+	printf("Your calendar:\n\n");
+
+	for (int i = 0; i < (teamsCount - 1) * 2; i++)
+	{
+		game = playerTeam->results.games[i];
+
+		printf("%s vs %s\n", teams[game.hostsIndex].name, teams[game.visitorsIndex].name);
+	}
 }

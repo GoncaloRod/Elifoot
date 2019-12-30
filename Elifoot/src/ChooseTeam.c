@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 
+#include "Utils.h"
+
 Team* ChooseTeam(Team* teams, int teamCount)
 {
 	int teamIndex;
@@ -21,7 +23,7 @@ Team* ChooseTeam(Team* teams, int teamCount)
 
 	} while (teamIndex < 0 || teamIndex > teamCount);
 
-	system("cls");
+	ClrScr();
 
 	return teams + (teamIndex - 1);
 }

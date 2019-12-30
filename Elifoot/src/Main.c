@@ -6,6 +6,8 @@
 #include "Files.h"
 
 #include "ChooseTeam.h"
+#include "Calendar.h"
+#include "Transfermarket.h"
 
 int main(int argc, char** argv)
 {
@@ -22,17 +24,15 @@ int main(int argc, char** argv)
 
 	playerTeam = ChooseTeam(teams, teamsCount);
 
-	// TODO: Shuffle game calendar
 	ShuffleCalendar(teams, teamsCount);
+	PrintGameCalendar(teams, playerTeam, teamsCount);
 
-	// TODO: Transfermarket
+	HandleTransfermarket(teams, teamsCount, playerTeam);
 
 	// TODO: Game loop
 	for (int i = 0; i < (teamsCount - 1) * 2; i++)
 	{
 		// If i % 4 == 0 pay the bills
-
-		printf("%s - %s\n", teams[playerTeam->results.games[i].hostsIndex].name, teams[playerTeam->results.games[i].visitorsIndex].name);
 	}
 
 	// Free dynamically allocated memory
