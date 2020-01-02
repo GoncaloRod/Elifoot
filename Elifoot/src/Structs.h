@@ -46,8 +46,19 @@ typedef struct
 
 typedef struct
 {
+	int forwardsCount;
+	int* forwardsIndex;
+	int midfildersCount;
+	int* midfildersIndex;
+	int defendersCount;
+	int* defendersIndex;
+} Tactic;
+
+typedef struct
+{
 	Coach coach;
 	Player* players;
+	Tactic tactic;
 	int playersCount;
 	int maxPlayers;
 } Squad;
