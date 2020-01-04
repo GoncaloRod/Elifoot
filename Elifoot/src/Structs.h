@@ -52,6 +52,7 @@ typedef struct
 	int* midfildersIndex;
 	int defendersCount;
 	int* defendersIndex;
+	int goalkeeperIndex;
 } Tactic;
 
 typedef struct
