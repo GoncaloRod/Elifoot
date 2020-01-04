@@ -1,5 +1,6 @@
 #include "Transfermarket.h"
 #include <stdio.h>
+#include <string.h>
 #include "Utils.h"
 
 void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
@@ -55,7 +56,7 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 		{
 			for (int j = 0; j < teamsCount; j++)
 			{
-				if (userTeamPick == player.name[userTeamPick-1])
+				if (strcmp(teams[userTeamPick-1].squad.players[userPlayerPick-1].name,teams[userTeamPick - 1].squad.players[j].name) == 0)
 				{	
 					//adding the new player to the team
 					playerTeam->squad.playersCount = playerTeam->squad.playersCount + teams[userTeamPick-1].squad.players[userPlayerPick - 1].name;
