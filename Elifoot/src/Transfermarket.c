@@ -65,7 +65,7 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 		else
 		{
 			printf("You have reached the limit of transfers.");
-			Main();
+			return;
 		}
 
 	}
