@@ -1,4 +1,6 @@
 #include "Transfermarket.h"
+#include <stdio.h>
+#include "Utils.h"
 
 void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 {
@@ -9,7 +11,7 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 
 	//variables that receive the users picked team & picked player & count the amout of transfers done by the user
 	int userTeamPick, userPlayerPick, transferCount;
-
+	ClrScr();
 	//the user picks a team to transfer a player from (easier to print info on console when reduced from 20000 choices to 20.)
 	printf("Pick from which team you want to transfer the player from:");
 
@@ -17,10 +19,11 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 	for (int i = 0; i < teamsCount; i++)
 	{
 		//prints the name of the teams on position i aka from 0 all the way to the number of teams
-		printf("[i] %s", teams->name[i]);
+		printf("[i] %c", teams->name[i]);
 	}
 
 	scanf_s("%d", &userTeamPick);
+	ClrScr();
 
 	//the user picks a player in order for the transfer value to be calculated
 	printf("Pick the player you want to transfer to your team:");
@@ -28,7 +31,7 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 	//cycle that prints the players names filtering through the teams pick
 	for (int k = 0; k < teams[userTeamPick-1].squad.playersCount; k++)
  	{
-		printf("[k] %s", player.name[k]);
+		printf("[k] %s", teams[userTeamPick-1].squad.players[k].name);
 	}
 
 	scanf_s("%d", &userPlayerPick);
@@ -40,6 +43,7 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 
 	transferCount = 0;
 
+	ClrScr();
 	if (teams->funds < transferValue)
 	{
 		printf("Insuficient funds");
@@ -47,14 +51,15 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 	}
 	else
 	{
-		if (transferCount <= 3)
+		if (transferCount <= 3 && teams->squad.playersCount <= teams->squad.maxPlayers)
 		{
 			for (int j = 0; j < teamsCount; j++)
 			{
 				if (userTeamPick == player.name[userTeamPick-1])
 				{	
 					//adding the new player to the team
-					teams[userTeamPick - 1].squad.players = teams[userTeamPick - 1].squad.players + player.name[userPlayerPick - 1];
+					playerTeam->squad.playersCount = playerTeam->squad.playersCount + teams[userTeamPick-1].squad.players[userPlayerPick - 1].name;
+
 					//setting the new salary for the player
 					teams[userTeamPick - 1].squad.players[userPlayerPick - 1].salary = teams[userTeamPick - 1].squad.players[userPlayerPick - 1].salary * 1.50F;
 					transferCount++;
