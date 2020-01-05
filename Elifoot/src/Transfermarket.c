@@ -12,7 +12,20 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 
 	//variables that receive the users picked team & picked player & count the amout of transfers done by the user
 	int userTeamPick, userPlayerPick, transferCount;
+	char userPick;
 	transferCount = 0;
+
+	printf("Do you want to transfer a player to your team? (y/n)");
+	scanf_s("%c", &userPick);
+
+	if (userPick == 'y') 
+	{
+		HandleTransfermarket(teams, teamsCount, playerTeam);
+	}
+	else 
+	{
+		return;
+	}
 
 	ClrScr();
 	//the user picks a team to transfer a player from (easier to print info on console when reduced from 20000 choices to 20.)
@@ -21,9 +34,15 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 	//cycle that goes through all the teams 
 	for (int i = 0; i < teamsCount; i++)
 	{
-		
-		//prints the name of the teams on position i aka from 0 all the way to the number of teams
-		printf("[%d] %s\n", i+1, teams[i].name);
+		if (strcmp(teams[i].name, playerTeam) == 0) 
+		{
+			printf("You can't transfer from your own team!");
+		}
+		else 
+		{
+			//prints the name of the teams on position i aka from 0 all the way to the number of teams
+			printf("[%d] %s\n", i + 1, teams[i].name);
+		}
 	}
 
 	scanf_s("%d", &userTeamPick);
