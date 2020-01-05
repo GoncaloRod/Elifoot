@@ -88,7 +88,7 @@ int main(int argc, char** argv)
 			{
 				tmpGame = teams[teamIndex].results.games + weekend;
 
-				//SimulateGame(teams, tmpGame);
+				SimulateGame(teams, tmpGame);
 
 				printf("%s %d - %d %s\n", teams[tmpGame->hostsIndex].name, tmpGame->hostsGoals, tmpGame->visitorsGoals, teams[tmpGame->visitorsIndex].name);
 			}
