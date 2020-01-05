@@ -47,12 +47,9 @@ typedef struct
 typedef struct
 {
 	int forwardsCount;
-	int* forwardsIndex;
-	int midfildersCount;
-	int* midfildersIndex;
+	int midfieldersCount;
 	int defendersCount;
-	int* defendersIndex;
-	int goalkeeperIndex;
+	int players[11];
 } Tactic;
 
 typedef struct
