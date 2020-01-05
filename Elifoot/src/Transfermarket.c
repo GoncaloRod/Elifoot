@@ -5,6 +5,7 @@
 
 void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 {
+	printf("Funds: %f", playerTeam->funds);
 	Player player;
 
 	//variable that calculates the value of the transfer & variable that counts the amount of funds required to transfer the player 
@@ -98,4 +99,5 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 		}
 		return teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name;
 	}
+	WaitForKey;
 }
