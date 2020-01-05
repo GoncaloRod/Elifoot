@@ -26,68 +26,70 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 		//prints the name of the teams on position i aka from 0 all the way to the number of teams
 		printf("[%d] %s\n", i + 1, teams[i].name);
 
-		scanf_s("%d", &userTeamPick);
+	}
+	scanf_s("%d", &userTeamPick);
 
-		if (strcmp(teams[userTeamPick - 1].name, playerTeam) == 0)
-		{
-			printf("You can't transfer from your own team!");
-		}
-		else
-		{
-			//the user picks a player in order for the transfer value to be calculated
-			printf("Pick the player you want to transfer to your team:\n");
-
-			//cycle that prints the players names filtering through the teams pick
-			for (int k = 0; k < teams[userTeamPick - 1].squad.playersCount; k++)
-			{
-				printf("[%d] %s\n", k + 1, teams[userTeamPick - 1].squad.players[k].name);
-			}
-
-			scanf_s("%d", &userPlayerPick);
-
-		}
-
-
+	if (strcmp(teams[userTeamPick - 1].name, playerTeam) == 0)
+	{
 		ClrScr();
+		printf("You can't transfer from your own team!");
+		return;
+	}
+	else
+	{
+		//the user picks a player in order for the transfer value to be calculated
+		printf("Pick the player you want to transfer to your team:\n");
 
-
-		transferValue = teams[userTeamPick - 1].squad.players[userPlayerPick - 1].salary * 5.0f * teams[userTeamPick - 1].squad.players[userPlayerPick - 1].contractYears;
-
-		//the amount of funds required is the amount of funds the team has minus the value of the transfer
-		fundsRequired = teams->funds - transferValue;
-
-		if (teams->funds < transferValue)
+		//cycle that prints the players names filtering through the teams pick
+		for (int k = 0; k < teams[userTeamPick - 1].squad.playersCount; k++)
 		{
-			printf("Insuficient funds");
-			printf("Current funds: %f", fundsRequired);
+			printf("[%d] %s\n", k + 1, teams[userTeamPick - 1].squad.players[k].name);
 		}
-		else
+
+		scanf_s("%d", &userPlayerPick);
+
+
+	ClrScr();
+
+
+	transferValue = teams[userTeamPick - 1].squad.players[userPlayerPick - 1].salary * 5.0f * teams[userTeamPick - 1].squad.players[userPlayerPick - 1].contractYears;
+
+	//the amount of funds required is the amount of funds the team has minus the value of the transfer
+	fundsRequired = teams->funds - transferValue;
+
+	if (teams->funds < transferValue)
+	{
+		printf("Insuficient funds");
+		printf("Current funds: %f", fundsRequired);
+	}
+	else
+	{
+		if (transferCount <= 3 && teams->squad.playersCount <= teams->squad.maxPlayers)
 		{
-			if (transferCount <= 3 && teams->squad.playersCount <= teams->squad.maxPlayers)
+			for (int j = 0; j < teamsCount; j++)
 			{
-				for (int j = 0; j < teamsCount; j++)
+				if (strcmp(teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name, teams[userTeamPick - 1].squad.players[j].name) == 0)
 				{
-					if (strcmp(teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name, teams[userTeamPick - 1].squad.players[j].name) == 0)
-					{
-						//adding the new player to the team
-						playerTeam->squad.playersCount = playerTeam->squad.playersCount + teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name;
+					//adding the new player to the team
+					playerTeam->squad.playersCount = playerTeam->squad.playersCount + teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name;
 
-						//setting the new salary for the player
-						teams[userTeamPick - 1].squad.players[userPlayerPick - 1].salary = teams[userTeamPick - 1].squad.players[userPlayerPick - 1].salary * 1.50F;
+					//setting the new salary for the player
+					teams[userTeamPick - 1].squad.players[userPlayerPick - 1].salary = teams[userTeamPick - 1].squad.players[userPlayerPick - 1].salary * 1.50F;
 
-						//keeps track of how many transfers the user has done and adds to the transfer count one transfer everytime this conditions passes 
-						transferCount++;
-						teamsCount++;
+					//keeps track of how many transfers the user has done and adds to the transfer count one transfer everytime this conditions passes 
+					transferCount++;
+					teamsCount++;
 
-						printf("Jogador adicionado com sucesso: %s", teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name);
-					}
+					printf("Jogador adicionado com sucesso: %s", teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name);
 				}
 			}
-			else
-			{
-				printf("You have reached the limit of transfers.");
-				return;
-			}
 		}
-		WaitForKey();
+		else
+		{
+			printf("You have reached the limit of transfers.");
+			return;
+		}
 	}
+	WaitForKey();
+}
+}
