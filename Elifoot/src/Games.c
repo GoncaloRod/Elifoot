@@ -12,7 +12,10 @@ void PlayGame(Team* teams, Game* game, Team* playerTeam)
 
 	ChangeTactic(playerTeam);
 
-	PickRandomTactic(teams + game->visitorsIndex);
+	if (teams + game->hostsIndex == playerTeam)
+		PickRandomTactic(teams + game->visitorsIndex);
+	else
+		PickRandomTactic(teams + game->hostsIndex);
 
 	SimulateFirstHalf(teams + game->hostsIndex, teams + game->visitorsIndex, game);
 
@@ -40,14 +43,22 @@ void PlayGame(Team* teams, Game* game, Team* playerTeam)
 	printf("It's the end of the game!\n");
 	printf("Final score: %d - %d\n\n", game->hostsGoals, game->visitorsGoals);
 
+	(teams + game->hostsIndex)->results.gamesPlayedCount++;
+	(teams + game->visitorsIndex)->results.gamesPlayedCount++;
+
 	WaitForKey();
 }
 
 void SimulateGame(Team* teams, Game* game)
 {
+	PickRandomTactic(teams + game->hostsIndex, teams + game->visitorsIndex);
+
 	SimulateFirstHalf(teams + game->hostsIndex, teams + game->visitorsIndex, game);
 
 	SimulateSecondHalf(teams + game->hostsIndex, teams + game->visitorsIndex, game);
+
+	(teams + game->hostsIndex)->results.gamesPlayedCount++;
+	(teams + game->visitorsIndex)->results.gamesPlayedCount++;
 }
 
 void ChangeTactic(Team* playerTeam)
@@ -194,6 +205,10 @@ void PickRandomTactic(Team* team)
 			defendersCount = 4;
 			break;
 	}
+
+	team->squad.tactic.forwardsCount = forwardsCount;
+	team->squad.tactic.midfieldersCount = midfieldersCount;
+	team->squad.tactic.defendersCount = defendersCount;
 
 	for (int i = 0; i < 11; i++)
 	{

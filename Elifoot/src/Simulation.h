@@ -7,4 +7,6 @@ void SimulateFirstHalf(Team* hosts, Team* visitors, Game* game);
 
 void SimulateSecondHalf(Team* hosts, Team* visitors, Game* game);
 
+void SimulateHalf(Team* hosts, Team* visitors, Game* game);
+
 #endif // !SIMULATION_H_
