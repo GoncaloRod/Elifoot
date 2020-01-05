@@ -7,4 +7,6 @@ void ShiftIntArrRight(int* arr, int count);
 
 void ClrScr();
 
+void WaitForKey();
+
 #endif // !UTILS_H_

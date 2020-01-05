@@ -23,3 +23,8 @@ void ClrScr()
 {
 	system("cls");
 }
+
+void WaitForKey()
+{
+	system("pause");
+}
