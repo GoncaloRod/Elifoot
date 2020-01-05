@@ -99,5 +99,5 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 		}
 		return teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name;
 	}
-	WaitForKey;
+	WaitForKey();
 }
