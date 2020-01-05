@@ -21,7 +21,7 @@ Team* ChooseTeam(Team* teams, int teamCount)
 		if (teamIndex < 0 || teamIndex > teamCount)
 			printf("Invalid team, please try again!\n");
 
-	} while (teamIndex < 0 || teamIndex > teamCount);
+	} while (teamIndex <= 0 || teamIndex > teamCount);
 
 	ClrScr();
 

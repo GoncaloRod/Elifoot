@@ -81,7 +81,7 @@ int ReadTeam(char* fileName, Team* team, int teamsCount)
 	// Read number of players
 	fscanf_s(fp, " %d", &playersCount);
 
-	team->squad.players = playersCount;
+	team->squad.playersCount = playersCount;
 	team->squad.maxPlayers = playersCount + 10;
 
 	// Allocate memory for all the players
