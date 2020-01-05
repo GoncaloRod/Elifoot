@@ -12,6 +12,8 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 
 	//variables that receive the users picked team & picked player & count the amout of transfers done by the user
 	int userTeamPick, userPlayerPick, transferCount;
+	transferCount = 0;
+
 	ClrScr();
 	//the user picks a team to transfer a player from (easier to print info on console when reduced from 20000 choices to 20.)
 	printf("Pick from which team you want to transfer the player from:\n");
@@ -43,9 +45,6 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 	//the amount of funds required is the amount of funds the team has minus the value of the transfer
 	fundsRequired = teams->funds - transferValue;
 
-	transferCount = 0;
-
-	ClrScr();
 	if (teams->funds < transferValue)
 	{
 		printf("Insuficient funds");
