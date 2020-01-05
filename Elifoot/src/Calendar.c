@@ -8,9 +8,12 @@
 void ShuffleCalendar(Team* teams, int teamsCount)
 {
 	Game game;
-	int* shuffle = (int*)malloc(teamsCount * sizeof(int));
+	int* shuffle;
 	int random;
 	char unique;
+
+	if (!(shuffle = (int*)malloc(teamsCount * sizeof(int))))
+		return;
 
 	for (int i = 0; i < teamsCount; i++)
 	{
