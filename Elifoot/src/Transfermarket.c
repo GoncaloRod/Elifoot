@@ -19,8 +19,9 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 	//cycle that goes through all the teams 
 	for (int i = 0; i < teamsCount; i++)
 	{
+		
 		//prints the name of the teams on position i aka from 0 all the way to the number of teams
-		printf("[%d] %s\n", i, teams[i].name);
+		printf("[%d] %s\n", i+1, teams[i].name);
 	}
 
 	scanf_s("%d", &userTeamPick);
@@ -32,7 +33,7 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 	//cycle that prints the players names filtering through the teams pick
 	for (int k = 0; k < teams[userTeamPick - 1].squad.playersCount; k++)
 	{
-		printf("[%d] %s\n", k, teams[userTeamPick - 1].squad.players[k].name);
+		printf("[%d] %s\n", k+1, teams[userTeamPick - 1].squad.players[k].name);
 	}
 
 	scanf_s("%d", &userPlayerPick);
@@ -63,8 +64,12 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 
 					//setting the new salary for the player
 					teams[userTeamPick - 1].squad.players[userPlayerPick - 1].salary = teams[userTeamPick - 1].squad.players[userPlayerPick - 1].salary * 1.50F;
+					
+					//keeps track of how many transfers the user has done and adds to the transfer count one transfer everytime this conditions passes 
 					transferCount++;
 					teamsCount++;
+
+					printf("Jogador adicionado com sucesso: %s", teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name);
 				}
 			}
 		}
@@ -73,6 +78,6 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 			printf("You have reached the limit of transfers.");
 			return;
 		}
-
+		return teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name;
 	}
 }
