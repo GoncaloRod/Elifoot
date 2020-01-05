@@ -5,7 +5,7 @@
 
 void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 {
-	printf("Funds: %f", playerTeam->funds);
+	printf("Funds: %f\n", playerTeam->funds);
 	Player player;
 
 	//variable that calculates the value of the transfer & variable that counts the amount of funds required to transfer the player 
@@ -37,6 +37,7 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 	}
 	else
 	{
+		ClrScr();
 		//the user picks a player in order for the transfer value to be calculated
 		printf("Pick the player you want to transfer to your team:\n");
 
@@ -59,8 +60,8 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 
 	if (teams->funds < transferValue)
 	{
-		printf("Insuficient funds");
-		printf("Current funds: %f", fundsRequired);
+		printf("Insuficient funds\n");
+		printf("Current funds: %f\n", fundsRequired);
 	}
 	else
 	{
@@ -80,13 +81,13 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 					transferCount++;
 					teamsCount++;
 
-					printf("Jogador adicionado com sucesso: %s", teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name);
+					printf("Jogador adicionado com sucesso: %s\n", teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name);
 				}
 			}
 		}
 		else
 		{
-			printf("You have reached the limit of transfers.");
+			printf("You have reached the limit of transfers.\n");
 			return;
 		}
 	}
