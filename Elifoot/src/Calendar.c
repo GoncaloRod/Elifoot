@@ -1,5 +1,8 @@
 #include "Calendar.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "Utils.h"
 
 void ShuffleCalendar(Team* teams, int teamsCount)

@@ -1,6 +1,7 @@
 #include "Files.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 Team* ReadTeams(char* fileName, int* teamCount)
 {
@@ -9,7 +10,9 @@ Team* ReadTeams(char* fileName, int* teamCount)
 	char teamFileName[32];
 
 	// Open teams file
-	if (!(fp = fopen(fileName, FM_READ)))
+	fopen_s(&fp, fileName, FM_READ);
+
+	if (!fp)
 		return NULL;
 
 	// Read amount of team inside file
@@ -21,7 +24,6 @@ Team* ReadTeams(char* fileName, int* teamCount)
 		fclose(fp);
 		return NULL;
 	}
-
 
 	// Read individual team
 	for (int i = 0; i < *teamCount; i++)
@@ -49,10 +51,12 @@ Team* ReadTeams(char* fileName, int* teamCount)
 int ReadTeam(char* fileName, Team* team, int teamsCount)
 {
 	FILE* fp;
-	Player* player;
 	int playersCount;
 
-	if (!(fp = fopen(fileName, FM_READ)))
+	// Open file
+	fopen_s(&fp, fileName, FM_READ);
+
+	if (!fp)
 		return 0;
 
 	// Read team info
