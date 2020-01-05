@@ -73,4 +73,7 @@ void PrintGameCalendar(Team* teams, Team* playerTeam, int teamsCount)
 
 		printf("%s vs %s\n", teams[game.hostsIndex].name, teams[game.visitorsIndex].name);
 	}
+
+	printf("\n");
+	WaitForKey();
 }
