@@ -43,22 +43,57 @@ void PlayGame(Team* teams, Game* game, Team* playerTeam)
 	printf("It's the end of the game!\n");
 	printf("Final score: %d - %d\n\n", game->hostsGoals, game->visitorsGoals);
 
-	(teams + game->hostsIndex)->results.gamesPlayedCount++;
-	(teams + game->visitorsIndex)->results.gamesPlayedCount++;
+	// Update results table
+	teams[game->hostsIndex].results.gamesPlayedCount++;
+	teams[game->visitorsIndex].results.gamesPlayedCount++;
+
+	if (game->hostsGoals > game->visitorsGoals)
+	{
+		teams[game->hostsIndex].results.wins++;
+		teams[game->visitorsGoals].results.defeats++;
+	}
+	else if (game->hostsGoals < game->visitorsGoals)
+	{
+		teams[game->hostsIndex].results.defeats++;
+		teams[game->visitorsGoals].results.wins++;
+	}
+	else
+	{
+		teams[game->hostsIndex].results.draws++;
+		teams[game->visitorsGoals].results.draws++;
+	}
 
 	WaitForKey();
 }
 
 void SimulateGame(Team* teams, Game* game)
 {
-	PickRandomTactic(teams + game->hostsIndex, teams + game->visitorsIndex);
+	PickRandomTactic(teams + game->hostsIndex);
+	PickRandomTactic(teams + game->visitorsIndex);
 
 	SimulateFirstHalf(teams + game->hostsIndex, teams + game->visitorsIndex, game);
 
 	SimulateSecondHalf(teams + game->hostsIndex, teams + game->visitorsIndex, game);
 
+	// Update results table
 	(teams + game->hostsIndex)->results.gamesPlayedCount++;
 	(teams + game->visitorsIndex)->results.gamesPlayedCount++;
+
+	if (game->hostsGoals > game->visitorsGoals)
+	{
+		teams[game->hostsIndex].results.wins++;
+		teams[game->visitorsGoals].results.defeats++;
+	}
+	else if (game->hostsGoals < game->visitorsGoals)
+	{
+		teams[game->hostsIndex].results.defeats++;
+		teams[game->visitorsGoals].results.wins++;
+	}
+	else
+	{
+		teams[game->hostsIndex].results.draws++;
+		teams[game->visitorsGoals].results.draws++;
+	}
 }
 
 void ChangeTactic(Team* playerTeam)
@@ -178,6 +213,7 @@ void PickRandomTactic(Team* team)
 {
 	int tactic = RandomInRange(1, 4);
 	int forwardsCount = 0, midfieldersCount = 0, defendersCount = 0;
+	int inUse, position;
 
 	switch (tactic)
 	{
@@ -210,8 +246,39 @@ void PickRandomTactic(Team* team)
 	team->squad.tactic.midfieldersCount = midfieldersCount;
 	team->squad.tactic.defendersCount = defendersCount;
 
-	for (int i = 0; i < 11; i++)
+	for (int i = 0, position = 0; i < team->squad.playersCount && position < 11; i++)
 	{
-		team->squad.tactic.players[i] = i;
+		if (position < forwardsCount)
+		{
+			if (team->squad.players[i].stats.forwardPower > 0)
+			{
+				team->squad.tactic.players[position] = i;
+				position++;
+			}
+		}
+		else if (position < midfieldersCount + forwardsCount)
+		{
+			if (team->squad.players[i].stats.midfilderPower > 0)
+			{
+				team->squad.tactic.players[position] = i;
+				position++;
+			}
+		}
+		else if (position < defendersCount + midfieldersCount + forwardsCount)
+		{
+			if (team->squad.players[i].stats.defenderPower > 0)
+			{
+				team->squad.tactic.players[position] = i;
+				position++;
+			}
+		}
+		else
+		{
+			if (team->squad.players[i].stats.goalkeeperPower > 0)
+			{
+				team->squad.tactic.players[position] = i;
+				position++;
+			}
+		}
 	}
 }

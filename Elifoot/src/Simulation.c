@@ -39,13 +39,13 @@ void SimulateHalf(Team* hosts, Team* visitors, Game* game)
 	for (int i = 0; i < 11; i++)
 	{
 		if (i < visitors->squad.tactic.forwardsCount)
-			hostsPower[0] += visitors->squad.players[visitors->squad.tactic.players[i]].stats.forwardPower;
+			visitorsPower[0] += visitors->squad.players[visitors->squad.tactic.players[i]].stats.forwardPower;
 		else if (i < visitors->squad.tactic.forwardsCount + visitors->squad.tactic.midfieldersCount)
-			hostsPower[1] += visitors->squad.players[visitors->squad.tactic.players[i]].stats.midfilderPower;
+			visitorsPower[1] += visitors->squad.players[visitors->squad.tactic.players[i]].stats.midfilderPower;
 		else if (i < visitors->squad.tactic.forwardsCount + visitors->squad.tactic.midfieldersCount + visitors->squad.tactic.defendersCount)
-			hostsPower[2] += visitors->squad.players[visitors->squad.tactic.players[i]].stats.defenderPower;
+			visitorsPower[2] += visitors->squad.players[visitors->squad.tactic.players[i]].stats.defenderPower;
 		else
-			hostsPower[3] += visitors->squad.players[visitors->squad.tactic.players[i]].stats.goalkeeperPower;
+			visitorsPower[3] += visitors->squad.players[visitors->squad.tactic.players[i]].stats.goalkeeperPower;
 	}
 
 	// Calculate performances
@@ -69,6 +69,6 @@ void SimulateHalf(Team* hosts, Team* visitors, Game* game)
 	visitorsDefendPower = visitorsPower[3] * (visitorsPerformace[3] * 0.01f) + (visitorsPower[2] * (visitorsPerformace[2] * 0.01f)) * 0.5f;
 
 	// Calculate goals
-	game->hostsGoals += hostsStrikePower - visitorsDefendPower * 0.1f;
-	game->visitorsGoals += visitorsStrikePower - hostsDefendPower * 0.1f;
+	game->hostsGoals += hostsStrikePower / visitorsDefendPower;
+	game->visitorsGoals += visitorsStrikePower / hostsDefendPower;
 }
