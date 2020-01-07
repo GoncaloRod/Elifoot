@@ -29,11 +29,11 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 	}
 	scanf_s("%d", &userTeamPick);
 
-	if (strcmp(teams[userTeamPick - 1].name, playerTeam) == 0)
+	if (strcmp(teams[userTeamPick - 1].name, playerTeam->name) == 0)
 	{
 		ClrScr();
 		printf("You can't transfer from your own team!");
-		return;
+		return HandleTransfermarket(teams, teamsCount, playerTeam);
 	}
 	else
 	{
@@ -92,5 +92,5 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 		}
 	}
 	WaitForKey();
-}
+    }
 }
