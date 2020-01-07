@@ -71,8 +71,8 @@ void HandleTransfermarket(Team* teams, int teamsCount, Team* playerTeam)
 			{
 				if (strcmp(teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name, teams[userTeamPick - 1].squad.players[j].name) == 0)
 				{
-					//adding the new player to the team
-					playerTeam->squad.playersCount = playerTeam->squad.playersCount + teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name;
+					//adding the new player to the team - inserts the player picked by the user on the users squad
+					playerTeam->squad.playersCount[teams[userTeamPick - 1].squad.players[userPlayerPick - 1].name];
 
 					//setting the new salary for the player
 					teams[userTeamPick - 1].squad.players[userPlayerPick - 1].salary = teams[userTeamPick - 1].squad.players[userPlayerPick - 1].salary * 1.50F;
